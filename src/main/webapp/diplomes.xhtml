@@ -1,0 +1,194 @@
+<ui:composition template="/template-lpee.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:define name="espace">
+<div id="step-holder2">
+	<h1>Espace Diplome SQLI Rabat</h1>
+		<!-- start step-holder -->
+							<div id="step-holder">
+							<div class="step-no-off">1</div>
+							<div class="step-light-left">Gérer Formateurs</div>
+							<div class="step-light-right"></div>
+							<div class="step-no-off">2</div>
+							<div class="step-light-left">Gérer Thêmes</div>
+							<div class="step-light-right"></div>
+							<div class="step-no-off">3</div>
+							<div class="step-light-left">Gérer Objectifs</div>
+							<div class="step-light-right"></div>
+							<div class="step-no">4</div>
+							<div class="step-dark-left">Gérer Diplomes</div>
+							<div class="step-dark-right"></div>
+							</div>
+		<!-- end step-holder -->
+	<h:form id="AjoutP">
+		<p:commandButton value="Ajouter un Diplome" icon="ui-icon-adds"
+			actionListener="#{diplomeBean.ajoutEventF(actionEvent)}"
+			update=":edit:editP" oncomplete="diplomeAjout.show()" />
+	</h:form>
+</div>
+</ui:define>
+<!--|||||||  end step-holder -->
+
+<!-- start id-form -->
+<!-- 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
+
+
+<ui:define name="content">
+<br />
+<center>
+<h:form id="a">
+	<p:growl id="growl" showDetail="true" sticky="false" />
+	<p:dataTable var="diplome" value="#{diplomeBean.listdiplome}"
+		id="AjoutTab" widgetVar="diplomeTable"
+		emptyMessage="diplome non trouvé" paginator="true" rows="5"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="5,10,15"
+		style="width:500px;font-size:13px;margin-left: 0px">
+
+		<f:facet name="header">
+			<p:outputPanel>
+				<h:outputText value="Recherche:" />
+				<p:inputText id="globalFilter" onkeyup="diplomeTable.filter()"
+					style="width:80px ;float:center " />
+			</p:outputPanel>
+		</f:facet>
+
+		<p:column headerText="Niveau " id="diplomeNiv"
+			filterBy="#{diplome.niveau}" filterMatchMode="exact"
+			footerText=" niveau exacte">
+			<h:outputText value="#{diplome.niveau}" />
+		</p:column>
+		<p:column headerText="Type de diplome " id="diplomeTyp"
+			filterBy="#{diplome.typeDiplome}" filterMatchMode="startsWith"
+			footerText="type de Diplome exacte">
+			<h:outputText value="#{diplome.typeDiplome}" />
+		</p:column>
+
+		<p:column style="width:4%">
+			<p:commandButton id="Editer" update=":Actualise:displaye"
+				icon="ui-icon-arrowrefresh-1-w" oncomplete="diplomeEdit.show();"
+				actionListener="#{diplomeBean.editEvent(diplome.idDiplome)}"
+				title="Editer" />
+		</p:column>
+		<p:column style="width:4%">
+			<p:commandButton id="Supprimer" update=":a:AjoutTab, :a:growl"
+				icon="ui-icon-trash" action="#{diplomeBean.delet(diplome)}"
+				title="Supprime">
+
+			</p:commandButton>
+		</p:column>
+
+	</p:dataTable>
+</h:form>
+</center>
+<h:form id="edit">
+
+	<p:dialog header="Ajout de diplome" widgetVar="diplomeAjout"
+		resizable="false" id="editP" modal="true"
+		style="height: 500px !important ; width:500px !important">
+
+		<p:growl id="growl" showDetail="true" sticky="false" life="10000" />
+		<h:panelGrid id="display" columns="2" cellpadding="4"
+			style="margin:4 auto ; height: 353px !important ; width:358px !important">
+
+			<f:facet name="header">
+				<h:outputLabel for="hed1" value="Formulaire d'ajout de diplome "
+					id="hed1" />
+			</f:facet>
+			<p:outputLabel for="niveau" title="Niveau" value="Niveau :"
+				style="color: #2E2EFE;" />
+				
+			<h:inputText value="#{diplomeBean.diplome.niveau}" id="niveau"
+				required="true" requiredMessage="Vous devez remplir le champs Niveau."
+				style="color: #2E2EFE;margin-bottom: 8px" />
+				
+				
+		
+				<h:outputText  value="Type de diplome : "  style="color:blue; font-size: 17px ;padding: 15px;margin: 0;" />
+									
+										<p:selectOneMenu 
+											value="#{diplomeBean.diplome.typeDiplome}"
+											effect="fold" editable="true" 
+							style="color:blue;margin-top: 18px;margin-bottom: 14px;">
+											<f:selectItem itemLabel="Select One" itemValue="" style="color:blue;margin-top: 18px;margin-bottom: 14px;"/>
+
+											<f:selectItems value="#{diplomeBean.type}"
+												var="player" itemLabel="#{player}"
+												itemValue="#{player}"  
+												style="color:blue;margin-top: 18px;margin-bottom: 14px;"/>
+										</p:selectOneMenu>			
+				
+				
+				
+		
+			
+		</h:panelGrid>
+		<p:separator />
+	<center>	<p:commandButton value="Enregistrer" update=":a:AjoutTab, growl"
+			actionListener="#{diplomeBean.ajoutF(actionEvent)  }"
+			oncomplete="diplomeAjout.hide()" /></center>
+	</p:dialog>
+
+</h:form>
+
+<h:form id="Actualise">
+	<p:dialog
+		header="Modification de Diplome #{diplomeBean.diplome.niveau}"
+		widgetVar="diplomeEdit" resizable="false" id="editPer" modal="true"
+		style="height: 500px !important ; width:500px !important">
+		<p:growl id="growl" showDetail="true" sticky="false" />
+		<h:panelGrid id="displaye" columns="2" cellpadding="4"
+			style="margin:4 auto ; height: 353px !important ; width:358px !important">
+
+			<f:facet name="header">
+				<h:outputLabel for="hed" value="Formulaire de Modification" id="hed" />
+			</f:facet>
+			<h:outputLabel for="niveau" title="Niveau" value="Niveau :"
+				style="color: #2E2EFE;" />
+			<h:inputText value="#{diplomeBean.diplome.niveau}" id="niveau" />
+			
+			
+			
+			
+			
+			<h:outputText  value="Type de diplome : "  style="color:blue; font-size: 17px ;padding: 15px;margin: 0;" />
+									
+										<p:selectOneMenu 
+											value="#{diplomeBean.diplome.typeDiplome}"
+											effect="fold" editable="true" 
+							style="color:blue;margin-top: 18px;margin-bottom: 14px;">
+											<f:selectItem itemLabel="Select One" itemValue="" style="color:blue;margin-top: 18px;margin-bottom: 14px;"/>
+
+											<f:selectItems value="#{diplomeBean.type}"
+												var="player" itemLabel="#{player}"
+												itemValue="#{player}"  
+												style="color:blue;margin-top: 18px;margin-bottom: 14px;"/>
+										</p:selectOneMenu>	
+		</h:panelGrid>
+		<p:separator />
+		<center><p:commandButton value="Enregistrer" update=":a:AjoutTab, growl"
+			actionListener="#{diplomeBean.edition(actionEvent) }"
+			oncomplete="diplomeEdit.hide()">
+		</p:commandButton></center>
+	</p:dialog>
+</h:form>
+
+ </ui:define>
+<ui:define name="lien1"> <a href="formations.xhtml">Ajouter une formation</a> </ui:define>
+	<ui:define name="lien2"> <a href="formationliste.xhtml">Lister les formations</a></ui:define>
+	<ui:define name="lien3"> <a href="formateurs.xhtml">Gerer les formateurs</a></ui:define>
+	<ui:define name="lien4"> <a href="postes.xhtml">Gerer les postes</a></ui:define>
+	<ui:define name="lien5"> <a href="ecoles.xhtml">Gerer les objectifs</a></ui:define>
+	<ui:define name="lien6"> <a href="diplomes.xhtml">Gerer les Diplomes</a></ui:define>
+	<ui:define name="lien7"> <a href="demandeformlisteadmin.xhtml">Lister les demandes de formation</a></ui:define>
+	<ui:define name="lien8"> <a href="demandeform.xhtml">Ajouter demande de formation</a></ui:define>
+	<ui:define name="lien9"> <a href="demandeformliste.xhtml">Répondre aux demandes</a></ui:define>
+	<ui:define name="lien10"> <a href="detailfromation.xhtml">Voir ses formations</a></ui:define>
+	<ui:define name="chiffre1"> Nombre totale : <span style="color:red;font-size:12">#{formationBean.listformation.size()}</span></ui:define>
+	<ui:define name="chiffre2"> Formation  Non réalisée :<span style="color:red;font-size:12">#{formationBean.listnonrealiser.size()}</span></ui:define>
+ 	</ui:composition>

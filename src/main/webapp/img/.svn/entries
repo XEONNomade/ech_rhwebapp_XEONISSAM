@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="https://aubin-pc/svn/test"
+   name=""
+   revision="16"
+   schedule="delete"
+   last-author="aubin"
+   url="https://aubin-pc/svn/test/firstapp-1.0/src/main/webapp/img"
+   committed-rev="16"
+   kind="dir"
+   committed-date="2013-05-09T16:51:43.794000Z"/>
+<entry
+   name="bg.gif"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-12T01:47:50.941000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="ab830edc5739854fed7f56d6a2576ac5"
+   prop-time="2013-05-09T15:51:22.090000Z"/>
+<entry
+   name="bgbottom.gif"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-12T01:47:50.943000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="0fd21954d929897ddb3f07ec7fb92719"
+   prop-time="2013-05-09T15:51:21.169000Z"/>
+<entry
+   name="bgcode.gif"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-12T01:47:50.946000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="048da09712ffe56e80ace427eaa7f362"
+   prop-time="2013-05-09T15:51:22.144000Z"/>
+<entry
+   name="danger.jpg"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-30T01:49:05.142000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="bf22d9b80db0813f2ee780dee0f717f8"
+   prop-time="2013-05-09T15:51:22.639000Z"/>
+<entry
+   name="li.gif"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-12T01:47:50.948000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="4fb7fabda5fcb59a53879203cb070c23"
+   prop-time="2013-05-09T15:51:21.469000Z"/>
+<entry
+   name="logo.gif"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-12T01:47:50.950000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="99ec6bef4f79aa753e5f2fe558d41ae0"
+   prop-time="2013-05-09T15:51:21.445000Z"/>
+<entry
+   name="logo_lpee.JPG"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-14T02:18:49.623000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="921d2a599e374818f32535e74dc16713"
+   prop-time="2013-05-09T15:51:22.295000Z"/>
+<entry
+   name="quote.gif"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-12T01:47:50.952000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="f9e25cf1b611a833ac59967b3808c6c6"
+   prop-time="2013-05-09T15:51:21.723000Z"/>
+<entry
+   name="round.gif"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-12T01:47:50.960000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="5784d4691240eb29cd2ede83006e6760"
+   prop-time="2013-05-09T15:51:21.679000Z"/>
+<entry
+   name="stripes.gif"
+   schedule="delete"
+   last-author="aubin"
+   committed-rev="16"
+   text-time="2013-04-12T01:47:50.963000Z"
+   kind="file"
+   committed-date="2013-05-09T16:51:43.794000Z"
+   checksum="0ff31cb6dcf4e0b7b191f0227d38a216"
+   prop-time="2013-05-09T15:51:21.064000Z"/>
+</wc-entries>
