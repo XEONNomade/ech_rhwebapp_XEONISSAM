@@ -8,7 +8,7 @@
 
 <ui:define name="espace">
 <div id="step-holder2">
-	<h1>Espace Technologie SQLI Rabat</h1>
+	<h1>Espace Diplome SQLI Rabat</h1>
 		<!-- start step-holder -->
 							<div id="step-holder">
 							<div class="step-no-off">1</div>
@@ -21,14 +21,14 @@
 							<div class="step-light-left">Gérer Objectifs</div>
 							<div class="step-light-right"></div>
 							<div class="step-no">4</div>
-							<div class="step-dark-left">Gérer Technologies</div>
+							<div class="step-dark-left">Gérer Diplomes</div>
 							<div class="step-dark-right"></div>
 							</div>
 		<!-- end step-holder -->
 	<h:form id="AjoutP">
-		<p:commandButton value="Ajouter une Technologie" icon="ui-icon-adds"
-			actionListener="#{technologieBean.ajoutTechnologieEvent(actionEvent)}"
-			update=":edit:editP" oncomplete="technologieAjout.show()" />
+		<p:commandButton value="Ajouter une Ecole" icon="ui-icon-adds"
+			actionListener="#{ecoleBean.ajoutEventF()}"
+			update=":edit:editP" oncomplete="ecoleAjout.show()" />
 	</h:form>
 </div>
 </ui:define>
@@ -43,9 +43,9 @@
 <center>
 <h:form id="a">
 	<p:growl id="growl" showDetail="true" sticky="false" />
-	<p:dataTable var="technologie" value="#{technologieBean.listtechnologie}"
-		id="AjoutTab" widgetVar="technologieTable"
-		emptyMessage="technologie non trouvé" paginator="true" rows="5"
+	<p:dataTable var="ecole" value="#{ecoleBean.listecole}"
+		id="AjoutTab" widgetVar="ecoleTable"
+		emptyMessage="ecole non trouvé" paginator="true" rows="5"
 		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 		rowsPerPageTemplate="5,10,15"
 		style="width:500px;font-size:13px;margin-left: 0px">
@@ -53,31 +53,31 @@
 		<f:facet name="header">
 			<p:outputPanel>
 				<h:outputText value="Recherche:" />
-				<p:inputText id="globalFilter" onkeyup="technologieTable.filter()"
+				<p:inputText id="globalFilter" onkeyup="ecoleTable.filter()"
 					style="width:80px ;float:center " />
 			</p:outputPanel>
 		</f:facet>
 
-		<p:column headerText="Niveau " id="technologieNiv"
-			filterBy="#{technologie.idTechnolgie}" filterMatchMode="exact"
-			footerText=" niveau exacte">
-			<h:outputText value="#{technologie.idTechnolgie}" />
+		<p:column headerText="Nom Ecole " id="ecoleNom"
+			filterBy="#{ecole.nomEcole}" filterMatchMode="exact"
+			footerText=" nom ecole exacte">
+			<h:outputText value="#{ecole.nomEcole}" />
 		</p:column>
-		<p:column headerText="Technologie " id="technologieTyp"
-			filterBy="#{technologie.libelleTechnolgie}" filterMatchMode="startsWith"
-			footerText="type de Technolgie exacte">
-			<h:outputText value="#{technologie.libelleTechnolgie}" />
+		<p:column headerText="Type de ecole " id="ecoleTyp"
+			filterBy="#{ecole.typeEcole}" filterMatchMode="startsWith"
+			footerText="type de ecole exacte">
+			<h:outputText value="#{ecole.typeEcole}" />
 		</p:column>
 
 		<p:column style="width:4%">
 			<p:commandButton id="Editer" update=":Actualise:displaye"
-				icon="ui-icon-arrowrefresh-1-w" oncomplete="technologieEdit.show();"
-				actionListener="#{technologieBean.editTechnologieEvent(technologie.idTechnolgie)}"
+				icon="ui-icon-arrowrefresh-1-w" oncomplete="ecoleEdit.show();"
+				action="#{ecoleBean.editEvent(ecole.idEcole)}"
 				title="Editer" />
 		</p:column>
 		<p:column style="width:4%">
 			<p:commandButton id="Supprimer" update=":a:AjoutTab, :a:growl"
-				icon="ui-icon-trash" action="#{technologieBean.deletTechnologie(technologie)}"
+				icon="ui-icon-trash" action="#{ecoleBean.delet(ecole)}"
 				title="Supprime">
 
 			</p:commandButton>
@@ -88,7 +88,7 @@
 </center>
 <h:form id="edit">
 
-	<p:dialog header="Ajout de technologie" widgetVar="technologieAjout"
+	<p:dialog header="Ajout de ecole" widgetVar="ecoleAjout"
 		resizable="false" id="editP" modal="true"
 		style="height: 500px !important ; width:500px !important">
 
@@ -97,29 +97,42 @@
 			style="margin:4 auto ; height: 353px !important ; width:358px !important">
 
 			<f:facet name="header">
-				<h:outputLabel for="hed1" value="Formulaire d'ajout de technologie "
+				<h:outputLabel for="hed1" value="Formulaire d'ajout de ecole "
 					id="hed1" />
 			</f:facet>
-			<p:outputLabel for="libelle" title="libelle" value="Libellé :"
+			<p:outputLabel for="nomecole" title="Nomecole" value="Nom Ecole :"
 				style="color: #2E2EFE;" />
 				
-			<h:inputText value="#{technologieBean.technolgie.libelleTechnolgie}" id="libelle"
-				required="true" requiredMessage="Vous devez remplir le champs Libellé"
+			<h:inputText value="#{ecoleBean.ecole.nomEcole}" id="nomecole"
+				required="true" requiredMessage="Vous devez remplir le champs Nom Ecole."
 				style="color: #2E2EFE;margin-bottom: 8px" />
+				
+				
+		
+				<h:outputText  value="Type de ecole : "  style="color:blue; font-size: 17px ;padding: 15px;margin: 0;" />
+									
+										<p:selectOneMenu 
+											value="#{ecoleBean.ecole.typeEcole}"
+											effect="fold" editable="true" 
+							style="color:blue;margin-top: 18px;margin-bottom: 14px;">
+											<f:selectItem itemLabel="Select One" itemValue="" style="color:blue;margin-top: 18px;margin-bottom: 14px;"/>
+                                            <f:selectItem itemLabel="Nationale" itemValue="Nationale" />
+											<f:selectItem itemLabel="Internationale" itemValue="Internationale" />
+		                                   </p:selectOneMenu>  
 			
 		</h:panelGrid>
 		<p:separator />
-	<p:commandButton value="Enregistrer" update=":a:AjoutTab, growl"
-			actionListener="#{technologieBean.ajouteTechnologie()  }"
-			oncomplete="technologieAjout.hide()" />
+	<center>	<p:commandButton value="Enregistrer" update=":a:AjoutTab, growl"
+			action="#{ecoleBean.ajoutF()}"
+			oncomplete="ecoleAjout.hide()" /></center>
 	</p:dialog>
 
 </h:form>
 
 <h:form id="Actualise">
 	<p:dialog
-		header="Modification de Technolgie #{technologieBean.technolgie.libelleTechnolgie}"
-		widgetVar="technologieEdit" resizable="false" id="editPer" modal="true"
+		header="Modification de Ecole #{ecoleBean.ecole.nomEcole}"
+		widgetVar="ecoleEdit" resizable="false" id="editPer" modal="true"
 		style="height: 500px !important ; width:500px !important">
 		<p:growl id="growl" showDetail="true" sticky="false" />
 		<h:panelGrid id="displaye" columns="2" cellpadding="4"
@@ -128,15 +141,25 @@
 			<f:facet name="header">
 				<h:outputLabel for="hed" value="Formulaire de Modification" id="hed" />
 			</f:facet>
-			<h:outputLabel for="libelletech" title="Libellé" value="Niveau :"
+			<h:outputLabel for="nomEcole" title="nomEcole" value="nomEcole :"
 				style="color: #2E2EFE;" />
-			<h:inputText value="#{technologieBean.technolgie.libelleTechnolgie}" id="libelletech" />
-			
+			<h:inputText value="#{ecoleBean.ecole.nomEcole}" id="nomEcole" />
+					
+			<h:outputText  value="Type de ecole : "  style="color:blue; font-size: 17px ;padding: 15px;margin: 0;" />
+									
+										<p:selectOneMenu 
+											value="#{ecoleBean.ecole.typeEcole}"
+											effect="fold" editable="true" 
+							style="color:blue;margin-top: 18px;margin-bottom: 14px;">
+											<f:selectItem itemLabel="Select One" itemValue="" style="color:blue;margin-top: 18px;margin-bottom: 14px;"/>
+                                    <f:selectItem itemLabel="Nationale" itemValue="Nationale" />
+											<f:selectItem itemLabel="Internationale" itemValue="Internationale" />
+									</p:selectOneMenu>  
 		</h:panelGrid>
 		<p:separator />
 		<center><p:commandButton value="Enregistrer" update=":a:AjoutTab, growl"
-			actionListener="#{technologieBean.editionTechnologie() }"
-			oncomplete="technologieEdit.hide()">
+			action="#{ecoleBean.edition()}"
+			oncomplete="ecoleEdit.hide()">
 		</p:commandButton></center>
 	</p:dialog>
 </h:form>
@@ -146,8 +169,8 @@
 	<ui:define name="lien2"> <a href="formationliste.xhtml">Lister les formations</a></ui:define>
 	<ui:define name="lien3"> <a href="formateurs.xhtml">Gerer les formateurs</a></ui:define>
 	<ui:define name="lien4"> <a href="postes.xhtml">Gerer les postes</a></ui:define>
-	<ui:define name="lien5"> <a href="ecoles.xhtml">Gerer les Ecoles</a></ui:define>
-	<ui:define name="lien6"> <a href="technologies.xhtml">Gerer les Technolgies</a></ui:define>
+	<ui:define name="lien5"> <a href="ecoles.xhtml">Gerer les ecoles</a></ui:define>
+	<ui:define name="lien6"> <a href="diplomes.xhtml">Gerer les Diplomes</a></ui:define>
 	<ui:define name="lien7"> <a href="demandeformlisteadmin.xhtml">Lister les demandes de formation</a></ui:define>
 	<ui:define name="lien8"> <a href="demandeform.xhtml">Ajouter demande de formation</a></ui:define>
 	<ui:define name="lien9"> <a href="demandeformliste.xhtml">Répondre aux demandes</a></ui:define>

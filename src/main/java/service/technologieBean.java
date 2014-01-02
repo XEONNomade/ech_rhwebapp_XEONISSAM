@@ -42,7 +42,7 @@ public class technologieBean implements Serializable {
 		technologie = new Technolgie();
 	}
      
-     public void ajoutEventF(ActionEvent actionEvent) {
+     public void ajoutTechnologieEvent(ActionEvent actionEvent) {
  		technologie = new Technolgie();
 
  	} 
@@ -51,20 +51,20 @@ public class technologieBean implements Serializable {
  		FacesContext context = FacesContext.getCurrentInstance();
  		context.addMessage(null, new FacesMessage("technologie supprime"));
  	}
-     public void editEvent(Integer idTechnolgie) {
+     public void editTechnologieEvent(Integer idTechnolgie) {
  		System.err.print(idTechnolgie);
  		dao = new technologieServ();
  		technologie = dao.getTechnolgie(idTechnolgie);
  	}
 	
- 	public void edition() {
+ 	public void editionTechnologie() {
 		dao = new technologieServ();
 		dao.updateTechnolgie(technologie);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("technologie mise a jour"));
 	}
 
- 	public void ajoutetechnologie() {
+ 	public void ajouteTechnologie() {
  		System.out.println("ajout de technologie .... " );
 		dao = new technologieServ();
 		Log.info(technologie.getLibelleTechnolgie());
@@ -76,7 +76,7 @@ public class technologieBean implements Serializable {
 		technologie = new Technolgie();
 	}
 	
- 	public void delet(Technolgie technologie) {
+ 	public void deletTechnologie(Technolgie technologie) {
 		dao = new technologieServ();
 		dao.deletTechnolgie(technologie);
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -84,7 +84,7 @@ public class technologieBean implements Serializable {
 
 	}
 
- 	public void deletM(Integer technologie) {
+ 	public void deletTechnologieId(Integer technologie) {
 		dao = new technologieServ();
 		dao.deletTechnolgieM(technologie);
 		FacesContext context = FacesContext.getCurrentInstance();

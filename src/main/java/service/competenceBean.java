@@ -23,7 +23,10 @@ public class competenceBean implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1673083797866023326L;
+	/**
+	 * 
+	 */
 	private static final Logger Log = Logger.getLogger(competenceBean.class) ;
 	private Competence competence;
 	competenceInt dao;
@@ -42,7 +45,8 @@ public class competenceBean implements Serializable {
 		competence = new Competence();
 	}
      
-     public void ajoutEventF(ActionEvent actionEvent) {
+     public void ajoutCompetenceEvent() {
+    	 System.out.println("competence créer");
  		competence = new Competence();
 
  	} 
@@ -51,20 +55,20 @@ public class competenceBean implements Serializable {
  		FacesContext context = FacesContext.getCurrentInstance();
  		context.addMessage(null, new FacesMessage("competence supprime"));
  	}
-     public void editEvent(Integer idCompetence) {
+     public void editCompetenceEvent(Integer idCompetence) {
  		System.err.print(idCompetence);
  		dao = new competenceServ();
  		competence = dao.getCompetence(idCompetence);
  	}
 	
- 	public void edition(ActionEvent actionEvent) {
+ 	public void editionCompetence() {
 		dao = new competenceServ();
 		dao.updateCompetence(competence);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("competence mise a jour"));
 	}
 
- 	public void ajoutecompetence(ActionEvent actionEvent) {
+ 	public void addCompetence() {
  		System.out.println("ajout de competence " );
 		dao = new competenceServ();
 		System.out.println("ajout de competence " );
@@ -74,8 +78,10 @@ public class competenceBean implements Serializable {
 		context.addMessage(null, new FacesMessage("competence ajoute"));
 		competence = new Competence();
 	}
+ 	
+ 	
 	
- 	public void delet(Competence competence) {
+ 	public void deletCompetence(Competence competence) {
 		dao = new competenceServ();
 		dao.deletCompetence(competence);
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -83,7 +89,7 @@ public class competenceBean implements Serializable {
 
 	}
 
- 	public void deletM(Integer competence) {
+ 	public void deletCompetenceId(Integer competence) {
 		dao = new competenceServ();
 		dao.deletCompetenceM(competence);
 		FacesContext context = FacesContext.getCurrentInstance();

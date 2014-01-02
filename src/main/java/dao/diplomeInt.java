@@ -8,6 +8,11 @@ import model.Diplome;
 
 @Transactional
 public interface diplomeInt {
+	
+	/*
+	 * interface   qui contient les différents fonctions 
+	 * qu'on peut appliquer sur  l'objet mappée de la base de donnée Diplome
+	 */
 	public void addDiplome(Diplome diplome);
 	public void updateDiplome(Diplome diplome);
 	public void deletDiplome(Diplome diplome);

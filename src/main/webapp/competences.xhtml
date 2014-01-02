@@ -9,7 +9,6 @@
 	<ui:define name="espace">
 		<div id="step-holder2">
 			<h1>Espace Competence SQLI Rabat</h1>
-			<!-- start step-holder -->
 			<div id="step-holder">
 				<div class="step-no-off">1</div>
 				<div class="step-light-left">Gérer Formateurs</div>
@@ -24,20 +23,13 @@
 				<div class="step-dark-left">Gérer Competences</div>
 				<div class="step-dark-right"></div>
 			</div>
-			<!-- end step-holder -->
-			<h:form id="AjoutP">
+			<h:form id="AjoutCompetence">
 				<p:commandButton value="Ajouter une Competence" icon="ui-icon-adds"
-					actionListener="#{competenceBean.ajoutEventF(actionEvent)}"
-					update=":edit:editP" oncomplete="competenceAjout.show()" />
+					action="#{competenceBean.ajoutCompetenceEvent()}"
+					update=":edit:editCompetence" oncomplete="competenceAjout.show()" />
 			</h:form>
 		</div>
 	</ui:define>
-	<!--|||||||  end step-holder -->
-
-	<!-- start id-form -->
-	<!-- 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
-
-
 	<ui:define name="content">
 		<br />
 		<center>
@@ -81,12 +73,12 @@
 						<p:commandButton id="Editer" update=":Actualise:displaye"
 							icon="ui-icon-arrowrefresh-1-w"
 							oncomplete="competenceEdit.show();"
-							actionListener="#{competenceBean.editEvent(competence.idCompetence)}"
+							action="#{competenceBean.editCompetenceEvent(competence.idCompetence)}"
 							title="Editer" />
 					</p:column>
 					<p:column style="width:4%">
 						<p:commandButton id="Supprimer" update=":a:AjoutTab, :a:growl"
-							icon="ui-icon-trash" action="#{competenceBean.delet(competence)}"
+							icon="ui-icon-trash" action="#{competenceBean.deletCompetence(competence)}"
 							title="Supprime">
 
 						</p:commandButton>
@@ -98,7 +90,7 @@
 		<h:form id="edit">
 
 			<p:dialog header="Ajout de competence" widgetVar="competenceAjout"
-				resizable="false" id="editP" modal="true"
+				resizable="false" id="editCompetence" modal="true"
 				style="height: 500px !important ; width:500px !important">
 
 				<p:growl id="growl" showDetail="true" sticky="false" life="10000" />
@@ -133,9 +125,9 @@
 				</h:panelGrid>
 				<p:separator />
 				<p:commandButton value="Enregistrer" update=":a:AjoutTab, growl"
-				
-					action="#{competenceBean.ajoutecompetence(actionEvent)  }"
-					oncomplete="competenceAjout.hide()" />
+				    ajax="true"
+					action="#{competenceBean.addCompetence()}"
+					oncomplete="competenceAjout.hide()"/>
 			</p:dialog>
 
 		</h:form>
@@ -143,7 +135,7 @@
 		<h:form id="Actualise">
 			<p:dialog
 				header="Modification de Competence #{competenceBean.competence.libelleCompetence}"
-				widgetVar="competenceEdit" resizable="false" id="editPer"
+				widgetVar="competenceEdit" resizable="false" id="editCompetenceer"
 				modal="true"
 				style="height: 500px !important ; width:500px !important">
 				<p:growl id="growl" showDetail="true" sticky="false" />
@@ -163,7 +155,7 @@
 				<p:separator />
 				<center>
 					<p:commandButton value="Enregistrer" update=":a:AjoutTab, growl"
-						actionListener="#{competenceBean.edition(actionEvent) }"
+						action="#{competenceBean.editionCompetence()}"
 						oncomplete="competenceEdit.hide()">
 					</p:commandButton>
 				</center>

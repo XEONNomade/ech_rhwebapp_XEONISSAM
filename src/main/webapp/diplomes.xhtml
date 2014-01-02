@@ -27,7 +27,7 @@
 		<!-- end step-holder -->
 	<h:form id="AjoutP">
 		<p:commandButton value="Ajouter un Diplome" icon="ui-icon-adds"
-			actionListener="#{diplomeBean.ajoutEventF(actionEvent)}"
+			action="#{diplomeBean.ajoutEventF()}"
 			update=":edit:editP" oncomplete="diplomeAjout.show()" />
 	</h:form>
 </div>
@@ -72,7 +72,7 @@
 		<p:column style="width:4%">
 			<p:commandButton id="Editer" update=":Actualise:displaye"
 				icon="ui-icon-arrowrefresh-1-w" oncomplete="diplomeEdit.show();"
-				actionListener="#{diplomeBean.editEvent(diplome.idDiplome)}"
+				action="#{diplomeBean.editEvent(diplome.idDiplome)}"
 				title="Editer" />
 		</p:column>
 		<p:column style="width:4%">
@@ -130,7 +130,7 @@
 		</h:panelGrid>
 		<p:separator />
 	<center>	<p:commandButton value="Enregistrer" update=":a:AjoutTab, growl"
-			actionListener="#{diplomeBean.ajoutF(actionEvent)  }"
+			action="#{diplomeBean.ajoutF()  }"
 			oncomplete="diplomeAjout.hide()" /></center>
 	</p:dialog>
 
@@ -172,7 +172,7 @@
 		</h:panelGrid>
 		<p:separator />
 		<center><p:commandButton value="Enregistrer" update=":a:AjoutTab, growl"
-			actionListener="#{diplomeBean.edition(actionEvent) }"
+			action="#{diplomeBean.edition() }"
 			oncomplete="diplomeEdit.hide()">
 		</p:commandButton></center>
 	</p:dialog>
@@ -183,7 +183,7 @@
 	<ui:define name="lien2"> <a href="formationliste.xhtml">Lister les formations</a></ui:define>
 	<ui:define name="lien3"> <a href="formateurs.xhtml">Gerer les formateurs</a></ui:define>
 	<ui:define name="lien4"> <a href="postes.xhtml">Gerer les postes</a></ui:define>
-	<ui:define name="lien5"> <a href="ecoles.xhtml">Gerer les objectifs</a></ui:define>
+	<ui:define name="lien5"> <a href="ecoles.xhtml">Gerer les ecoles</a></ui:define>
 	<ui:define name="lien6"> <a href="diplomes.xhtml">Gerer les Diplomes</a></ui:define>
 	<ui:define name="lien7"> <a href="demandeformlisteadmin.xhtml">Lister les demandes de formation</a></ui:define>
 	<ui:define name="lien8"> <a href="demandeform.xhtml">Ajouter demande de formation</a></ui:define>

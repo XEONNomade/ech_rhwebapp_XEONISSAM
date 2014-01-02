@@ -4,14 +4,10 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-    
-         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost/bddsqli</property>
         <property name="hibernate.connection.username">root</property>
-        
-         <!-- SQL dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         
          <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
@@ -28,6 +24,6 @@
         <!-- Drop and re-create the database schema on startup -->
         
         <property name="hbm2ddl.auto">validate</property>
-        
+     
     </session-factory>
 </hibernate-configuration>
