@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import model.Diplome;
 
 @Transactional
-public interface diplomeInt {
+public interface DiplomeInt {
 	
 	/*
 	 * interface   qui contient les différents fonctions 

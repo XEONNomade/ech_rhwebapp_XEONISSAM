@@ -12,8 +12,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import dao.ecoleInt;
-import dao.ecoleServ;
+import dao.EcoleInt;
+import dao.EcoleServ;
 import model.*;
 
 @ManagedBean(name = "ecoleBean")
@@ -22,14 +22,14 @@ import model.*;
 /*
  * ecolebean est un Bean qui permet de gérer le panneau de ecole
  */
-public class ecoleBean implements Serializable {
+public class EcoleBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Ecole ecole;
-	ecoleInt dao;
+	EcoleInt dao;
 	
 	
 	
@@ -41,12 +41,12 @@ public class ecoleBean implements Serializable {
 	/*
 	 * getter et setter de dao
 	 */
-	public ecoleInt getDao() {
+	public EcoleInt getDao() {
 		return dao;
 	}
 
 
-	public void setDao(ecoleInt dao) {
+	public void setDao(EcoleInt dao) {
 		this.dao = dao;
 	}
 
@@ -55,7 +55,7 @@ public class ecoleBean implements Serializable {
 	/*
 	 * Constructeur de ecole permet d'instancier un objet ecole
 	 */
-     public ecoleBean() {
+     public EcoleBean() {
 		// TODO Auto-generated constructor stub
     	 
     	
@@ -75,7 +75,7 @@ public class ecoleBean implements Serializable {
   	 */
      public void editEvent(Integer idEcole) {
  		System.err.print(idEcole);
- 		dao = new ecoleServ();
+ 		dao = new EcoleServ();
  		ecole = dao.getEcole(idEcole);
  	}
 	
@@ -84,7 +84,7 @@ public class ecoleBean implements Serializable {
    	 */
  	public void edition() {
  		System.err.println("test");
-		dao = new ecoleServ();
+		dao = new EcoleServ();
 		dao.updateEcole(ecole);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("ecole mise a jour"));
@@ -95,7 +95,7 @@ public class ecoleBean implements Serializable {
    	 */
  	public void ajoutF() {
  		System.out.println(ecole.getNomEcole() );
-		dao = new ecoleServ();
+		dao = new EcoleServ();
 		System.out.println(ecole.getNomEcole() );
 		System.out.println("ajout de ecole " );
 		dao.addEcole(ecole);
@@ -109,7 +109,7 @@ public class ecoleBean implements Serializable {
    	 * Fonction delet(Ecole ecole) permet de supprimer l'objet ecole  qu'on a recuperer
    	 */
  	public void delet(Ecole ecole) {
-		dao = new ecoleServ();
+		dao = new EcoleServ();
 		dao.deletEcole(ecole);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("ecole supprime"));
@@ -120,7 +120,7 @@ public class ecoleBean implements Serializable {
    	 * variante de Fonction deletM(Integer ecole) qui permet de supprimer l'objet ecole  qu'on a recuperer
    	 */
  	public void deletM(Integer ecole) {
-		dao = new ecoleServ();
+		dao = new EcoleServ();
 		dao.deletEcoleM(ecole);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("ecole supprime"));
@@ -131,7 +131,7 @@ public class ecoleBean implements Serializable {
    	 *  Fonction  getter de listecole qui permet de recuperer la liste de ecoles 
    	 */
  	public List<Ecole> getListecole() {
-		dao = new ecoleServ();
+		dao = new EcoleServ();
 		listecole = dao.getListEcole();
 		return (List<Ecole>) listecole;
 	}

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import model.Compte;
 import model.Responsable;;
 @Transactional
-public interface compteInt {
+public interface CompteInt {
 	
 		public void addCompte(Compte compte , Responsable p);
 		public void updateCompte(Compte compte);

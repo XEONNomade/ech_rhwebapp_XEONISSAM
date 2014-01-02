@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import model.Poste;
 
 @Transactional
-public interface posteInt {
+public interface PosteInt {
 	/*
 	 * interface   qui contient les différents fonctions 
 	 * qu'on peut appliquer sur  l'objet mappée de la base de donnée Poste

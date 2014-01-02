@@ -2,35 +2,36 @@ package service;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
+import model.Responsable;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dao.responsableInt;
-import dao.responsableServ;
-
-import model.*;
+import dao.ResponsableInt;
+import dao.ResponsableServ;
 
 @ManagedBean(name = "responsableBean")
 @SessionScoped
-public class responsableBean implements Serializable {
+public class ResponsableBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	responsableInt dao;
+	ResponsableInt dao;
 	
 	@Autowired
 	private transient String login;
 	@Autowired
 	private transient String motp;
-	 
+	private static final Logger Log = Logger.getLogger(ResponsableBean.class) ;
 	private Responsable responsable;
 	private List<Responsable> listresponsable;
 	private Responsable[] selectedResponsables;
@@ -42,7 +43,7 @@ public class responsableBean implements Serializable {
 		this.selectedResponsables = selectedResponsables;
 	}
 
-	public responsableBean() {
+	public ResponsableBean() {
 		responsable = new Responsable();
 	}
 
@@ -57,19 +58,19 @@ public class responsableBean implements Serializable {
 
 	public void editResponsableEvent(Integer id) {
 		System.out.print(id);
-		dao = new responsableServ();
+		dao = new ResponsableServ();
 		responsable = dao.getResponsable(id);
 	}
 
 	public void editionResponsable() {
-		dao = new responsableServ();
+		dao = new ResponsableServ();
 		dao.updateResponsable(responsable);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("responsable mise à jour"));
 	}
 
 	public void ajouteResponsable() {
-		dao = new responsableServ();
+		dao = new ResponsableServ();
 		dao.addResponsable(responsable);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("responsable ajouté"));
@@ -77,14 +78,14 @@ public class responsableBean implements Serializable {
 	}
 
 	public void deletResponsable(Responsable responsable) {
-		dao = new responsableServ();
+		dao = new ResponsableServ();
 		dao.deletresponsable(responsable);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("responsable supprimé"));
 
 	}
 	public void deletResponsableId(Integer responsable) {
-		dao = new responsableServ();
+		dao = new ResponsableServ();
 		dao.deletresponsableId(responsable);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("responsable supprimé"));
@@ -92,7 +93,7 @@ public class responsableBean implements Serializable {
 	}
 
 	public List<Responsable> getListresponsable() {
-		dao = new responsableServ();
+		dao = new ResponsableServ();
 		System.out.println("la liste des responsables");
 		listresponsable = dao.getListResponsable();
 		System.out.println("la liste des responsables");
@@ -111,11 +112,11 @@ public class responsableBean implements Serializable {
 		this.responsable = responsable;
 	}
 		
-	public responsableInt getDao() {
+	public ResponsableInt getDao() {
 		return dao;
 	}
 
-	public void setDao(responsableInt dao) {
+	public void setDao(ResponsableInt dao) {
 		this.dao = dao;
 	}
 	

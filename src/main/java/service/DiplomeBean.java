@@ -12,8 +12,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import dao.diplomeInt;
-import dao.diplomeServ;
+import dao.DiplomeInt;
+import dao.DiplomeServ;
 import model.*;
 
 @ManagedBean(name = "diplomeBean")
@@ -22,14 +22,14 @@ import model.*;
 /*
  * diplomebean est un Bean qui permet de gérer le panneau de diplome
  */
-public class diplomeBean implements Serializable {
+public class DiplomeBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Diplome diplome;
-	diplomeInt dao;
+	DiplomeInt dao;
 	private  List<String> type ;
 	
 	
@@ -48,11 +48,11 @@ public class diplomeBean implements Serializable {
 	/*
 	 * getter et setter de dao
 	 */
-	public diplomeInt getDao() {
+	public DiplomeInt getDao() {
 		return dao;
 	}
 
-	public void setDao(diplomeInt dao) {
+	public void setDao(DiplomeInt dao) {
 		this.dao = dao;
 	}
 
@@ -61,7 +61,7 @@ public class diplomeBean implements Serializable {
 	/*
 	 * Constructeur de diplome permet d'instancier un objet diplome
 	 */
-     public diplomeBean() {
+     public DiplomeBean() {
 		// TODO Auto-generated constructor stub
     	 type = new ArrayList<String>();
  		type.add("etatique");
@@ -82,7 +82,7 @@ public class diplomeBean implements Serializable {
   	 */
      public void editEvent(Integer idDiplome) {
  		System.err.print(idDiplome);
- 		dao = new diplomeServ();
+ 		dao = new DiplomeServ();
  		diplome = dao.getDiplome(idDiplome);
  	}
 	
@@ -90,7 +90,7 @@ public class diplomeBean implements Serializable {
    	 * Fonction edition(ActionEvent actionEvent) permet de modier l'objet diplome  qu'on a recuperer
    	 */
  	public void edition() {
-		dao = new diplomeServ();
+		dao = new DiplomeServ();
 		dao.updateDiplome(diplome);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("diplome mise a jour"));
@@ -100,7 +100,7 @@ public class diplomeBean implements Serializable {
    	 * Fonction ajoutF(ActionEvent actionEvent) permet d'ajouter l'objet diplome  qu'on a preparer
    	 */
  	public void ajoutF() {
-		dao = new diplomeServ();
+		dao = new DiplomeServ();
 		System.out.println(diplome.getNiveau() );
 		System.out.println("ajout de diplome " );
 		dao.addDiplome(diplome);
@@ -114,7 +114,7 @@ public class diplomeBean implements Serializable {
    	 * Fonction delet(Diplome diplome) permet de supprimer l'objet diplome  qu'on a recuperer
    	 */
  	public void delet(Diplome diplome) {
-		dao = new diplomeServ();
+		dao = new DiplomeServ();
 		dao.deletDiplome(diplome);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("diplome supprime"));
@@ -125,7 +125,7 @@ public class diplomeBean implements Serializable {
    	 * variante de Fonction deletM(Integer diplome) qui permet de supprimer l'objet diplome  qu'on a recuperer
    	 */
  	public void deletM(Integer diplome) {
-		dao = new diplomeServ();
+		dao = new DiplomeServ();
 		dao.deletDiplomeM(diplome);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("diplome supprime"));
@@ -136,7 +136,7 @@ public class diplomeBean implements Serializable {
    	 *  Fonction  getter de listdiplome qui permet de recuperer la liste de diplomes 
    	 */
  	public List<Diplome> getListdiplome() {
-		dao = new diplomeServ();
+		dao = new DiplomeServ();
 		listdiplome = dao.getListDiplome();
 		return (List<Diplome>) listdiplome;
 	}

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import model.Competence;
 
 @Transactional
-public interface competenceInt {
+public interface CompetenceInt {
 	public void addCompetence(Competence competence);
 	public void updateCompetence(Competence competence);
 	public void deletCompetence(Competence competence);

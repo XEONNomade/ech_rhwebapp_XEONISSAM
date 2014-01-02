@@ -3,6 +3,7 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,19 +11,24 @@ import model.Compte;
 import model.Responsable;
 
 @Transactional
-public class compteServ implements compteInt,Serializable {
+public class CompteServ implements CompteInt,Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger Log = Logger.getLogger(ResponsableServ.class) ;
+
 	
-	public compteServ(){
-		System.err.println("Instanciation de compteServ");
+	public CompteServ(){
+		Log.error("Instanciation de compteServ");
 	}
 
+//	la fonction qui s'occupe d'ajouter des objets comptes a la base de données
+
+	
 	public void addCompte(Compte compte, Responsable p){
-		System.err.println("appel de addCompte");
+		Log.error("appel de addCompte");
 		Session ses = HibernateUtil.getSession();
 		compte.setResponsable(p);
 		try {
@@ -30,9 +36,9 @@ public class compteServ implements compteInt,Serializable {
 		ses.save(compte);
 		ses.getTransaction().commit();
 		//ses.close();
-		System.out.print("bien ajouté");
+		Log.info("bien ajouté");
 		} catch (Exception e) {
-			System.out.print("erreur insertion" + e.getMessage());
+			Log.info("erreur insertion" + e.getMessage());
 		}
 	}
 	
@@ -46,12 +52,14 @@ public class compteServ implements compteInt,Serializable {
 		ses.getTransaction().commit();
 		//ses.close();
 	} catch (Exception e) {
-		System.out.print("erreur suppression " + e.getMessage());
+		Log.info("erreur suppression " + e.getMessage());
 		ses.beginTransaction().rollback();
 		return l;
 	}
 	return l;
 }
+
+//	la mise a jour d'un objet Responsable dans la base de données
 
 	// @Override
 	public void updateCompte(Compte compte) {
@@ -62,11 +70,13 @@ public class compteServ implements compteInt,Serializable {
 			session.update(compte);
 			session.getTransaction().commit();
 			//session.close();
-			System.out.print("bien ajouté");
+			Log.info("bien ajouté");
 		} catch (Exception e) {
-			System.out.print("erreur insertion" + e.getMessage());
+			Log.info("erreur insertion" + e.getMessage());
 		}
 	}
+
+//	la supprission d'un compte 
 
 	// @Override
 	public void deletcompte(Compte compte) {
@@ -77,10 +87,11 @@ public class compteServ implements compteInt,Serializable {
 			session.getTransaction().commit();
 			//session.close();
 		} catch (Exception e) {
-			System.out.print("erreur suppression" + e.getMessage());
+			Log.info("erreur suppression" + e.getMessage());
 			session.beginTransaction().rollback();
 		}
 	}
+	/* findById Trouver un objet par son identifiant dans  la base de donnée */
 
 	// @Override
 	public Compte getCompte(Integer id) {
@@ -91,9 +102,8 @@ public class compteServ implements compteInt,Serializable {
 			session.beginTransaction();
 			compte = (Compte) session.get(Compte.class, id);
 			session.getTransaction().commit();
-			//session.close();
 		} catch (Exception e) {
-			System.out.print("erreur suppression" + e.getMessage());
+			Log.info("erreur suppression" + e.getMessage());
 			session.beginTransaction().rollback();
 			return compte;
 		}
@@ -106,13 +116,12 @@ public class compteServ implements compteInt,Serializable {
 	
 		Session session = HibernateUtil.getSession();
 		try {
-			System.out.println( " /////////// hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh////////"+id);
+			Log.info( " /////////// hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh////////"+id);
 			session.beginTransaction();
-		//	compte = (Compte) session.get(Compte.class, id);
 			listobject=listCompte();
 			for (Compte cmt : listobject ) {
 				if(cmt.getLogin().equals(id)){
-					System.out.println( "  compte de password "+cmt.getPword());
+					Log.info( "  compte de password "+cmt.getPword());
 					compte=cmt;
 					
 				}
@@ -121,12 +130,15 @@ public class compteServ implements compteInt,Serializable {
 			
 			
 		} catch (Exception e) {
-			System.out.print("erreur suppression" + e.getMessage());
+			Log.info("erreur suppression" + e.getMessage());
 			session.beginTransaction().rollback();
 			return compte;
 		}
 		return compte;
 	}
+	
+//	l'extraction d'un compte a l'aide de son identifiant
+
 	public Compte getCompteO(Object object) {
 		Compte compte= null;
 		Session session = HibernateUtil.getSession();
@@ -134,9 +146,8 @@ public class compteServ implements compteInt,Serializable {
 			session.beginTransaction();
 			compte = (Compte) session.get(Compte.class, (Serializable) object);
 			session.getTransaction().commit();
-			//session.close();
 		} catch (Exception e) {
-			System.out.print("erreur suppression" + e.getMessage());
+			Log.info("erreur suppression" + e.getMessage());
 			session.beginTransaction().rollback();
 			return compte;
 		}

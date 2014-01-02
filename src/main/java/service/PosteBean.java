@@ -12,8 +12,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import dao.posteInt;
-import dao.posteServ;
+import dao.PosteInt;
+import dao.PosteServ;
 import model.*;
 
 @ManagedBean(name = "posteBean")
@@ -22,14 +22,14 @@ import model.*;
 /*
  * postebean est un Bean qui permet de gérer le panneau de poste
  */
-public class posteBean implements Serializable {
+public class PosteBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Poste poste;
-	posteInt dao;
+	PosteInt dao;
 	
 	
 	
@@ -41,12 +41,12 @@ public class posteBean implements Serializable {
 	/*
 	 * getter et setter de dao
 	 */
-	public posteInt getDao() {
+	public PosteInt getDao() {
 		return dao;
 	}
 
 
-	public void setDao(posteInt dao) {
+	public void setDao(PosteInt dao) {
 		this.dao = dao;
 	}
 
@@ -55,7 +55,7 @@ public class posteBean implements Serializable {
 	/*
 	 * Constructeur de poste permet d'instancier un objet poste
 	 */
-     public posteBean() {
+     public PosteBean() {
 		// TODO Auto-generated constructor stub
     	 
     	
@@ -75,7 +75,7 @@ public class posteBean implements Serializable {
   	 */
      public void editEvent(Integer idPoste) {
  		System.err.print(idPoste);
- 		dao = new posteServ();
+ 		dao = new PosteServ();
  		poste = dao.getPoste(idPoste);
  	}
 	
@@ -83,7 +83,7 @@ public class posteBean implements Serializable {
    	 * Fonction edition(ActionEvent actionEvent) permet de modier l'objet poste  qu'on a recuperer
    	 */
  	public void edition() {
-		dao = new posteServ();
+		dao = new PosteServ();
 		if((poste.getLibellePoste().length()<4) && (poste.getFposte().length()<5)){
 		dao.updatePoste(poste);
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -101,7 +101,7 @@ public class posteBean implements Serializable {
    	 * Fonction ajoutF(ActionEvent actionEvent) permet d'ajouter l'objet poste  qu'on a preparer
    	 */
  	public void ajoutF() {
-		dao = new posteServ();
+		dao = new PosteServ();
 		System.out.println(poste.getLibellePoste() );
 		System.out.println("ajout de poste " );
 		if((poste.getLibellePoste().length()<4) && (poste.getFposte().length()<5)){
@@ -123,7 +123,7 @@ public class posteBean implements Serializable {
    	 * Fonction delet(Poste poste) permet de supprimer l'objet poste  qu'on a recuperer
    	 */
  	public void delet(Poste poste) {
-		dao = new posteServ();
+		dao = new PosteServ();
 		dao.deletPoste(poste);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("poste supprime"));
@@ -134,7 +134,7 @@ public class posteBean implements Serializable {
    	 * variante de Fonction deletM(Integer poste) qui permet de supprimer l'objet poste  qu'on a recuperer
    	 */
  	public void deletM(Integer poste) {
-		dao = new posteServ();
+		dao = new PosteServ();
 		dao.deletPosteM(poste);
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("poste supprime"));
@@ -145,7 +145,7 @@ public class posteBean implements Serializable {
    	 *  Fonction  getter de listposte qui permet de recuperer la liste de postes 
    	 */
  	public List<Poste> getListposte() {
-		dao = new posteServ();
+		dao = new PosteServ();
 		listposte = dao.getListPoste();
 		return (List<Poste>) listposte;
 	}

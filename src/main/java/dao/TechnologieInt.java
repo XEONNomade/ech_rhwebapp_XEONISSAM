@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import model.Technolgie;
 
 @Transactional
-public interface technologieInt {
+public interface TechnologieInt {
 	public void addTechnolgie(Technolgie technologie);
 	public void updateTechnolgie(Technolgie technologie);
 	public void deletTechnolgie(Technolgie technologie);

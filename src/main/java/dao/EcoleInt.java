@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import model.Ecole;
 
 @Transactional
-public interface ecoleInt {
+public interface EcoleInt {
 	/*
 	 * interface   qui contient les différents fonctions 
 	 * qu'on peut appliquer sur  l'objet mappée de la base de donnée Ecole

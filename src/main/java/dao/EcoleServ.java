@@ -11,126 +11,127 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.apache.log4j.Logger;
 
-@Service("posteInt")
+@Service("ecoleInt")
 @Transactional
-public class posteServ implements posteInt, Serializable {
+public class EcoleServ implements EcoleInt, Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Logger Log = Logger.getLogger(posteServ.class) ;
+	private static final Logger Log = Logger.getLogger(EcoleServ.class) ;
     
 	/*
-	 * Ajouter un poste
+	 * Ajouter un ecole
 	 */
 	@Override
-	public void addPoste(Poste poste) {
+	public void addEcole(Ecole ecole) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSession();
+		Log.info("ecole bien ajoute");
 		try {
 			session.beginTransaction();
-			session.save(poste);
+			session.save(ecole);
 				session.getTransaction().commit();
-				Log.info("poste bien ajoute");
+				Log.info("ecole bien ajoute");
 		} catch (Exception e) {
-			System.err.print("erreur insertion poste :" + e.getMessage());
+			System.err.print("erreur insertion ecole :" + e.getMessage());
 		}	
 	}
     
 	/*
-	 * Modifier un poste
+	 * Modifier un ecole
 	 */
 	@Override
-	public void updatePoste(Poste poste) {
+	public void updateEcole(Ecole ecole) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSession();
 		try {
 			session.beginTransaction();
-			session.update(poste);
+			session.update(ecole);
 			session.getTransaction().commit();
-			Log.info("poste mise à jour");
+			Log.info("ecole mise à jour");
 		} catch (Exception e) {
-			System.out.print("erreur update poste :" + e.getMessage());
+			System.out.print("erreur update ecole :" + e.getMessage());
 		}
 	}
 
 	/*
-	 * Supprimer un poste en spécifiant le poste
+	 * Supprimer un ecole en spécifiant le ecole
 	 */
 	@Override
-	public void deletPoste(Poste poste) {
+	public void deletEcole(Ecole ecole) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSession();
 		try {
 			session.beginTransaction();
-			session.delete(poste);
+			session.delete(ecole);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.err.print(" erreur suppression  poste :" + e.getMessage());
+			System.err.print(" erreur suppression  ecole :" + e.getMessage());
 			session.beginTransaction().rollback();
 		}
 	}
 
 	/*
-	 * get poste en spécifiant l'Id de poste
+	 * get ecole en spécifiant l'Id de ecole
 	 */
 	@Override
-	public Poste getPoste(Integer id) {
+	public Ecole getEcole(Integer id) {
 		// TODO Auto-generated method stub
-		Poste poste = null;
+		Ecole ecole = null;
 		Session session = HibernateUtil.getSession();
 		try {
 			session.beginTransaction();
-			poste = (Poste) session.get(Poste.class, id);
+			ecole = (Ecole) session.get(Ecole.class, id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print("erreur getposte " + e.getMessage());
+			System.out.print("erreur getecole " + e.getMessage());
 			session.beginTransaction().rollback();
-			return poste;
+			return ecole;
 		}
-		return poste;
+		return ecole;
 	}
     
 	/*
-	 * get de la liste des postes
+	 * get de la liste des ecoles
 	 */
 	@Override
-	public List<Poste> getListPoste() {
+	public List<Ecole> getListEcole() {
 		// TODO Auto-generated method stub
 		
 		
-		List<Poste> listPoste = null;
+		List<Ecole> listEcole = null;
 		Session session = HibernateUtil.getSession();
 		try {
 			session.beginTransaction();
-			List<Poste> list = session.createQuery("from Poste").list();
-			listPoste = list;
+			List<Ecole> list = session.createQuery("from Ecole").list();
+			listEcole = list;
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print("erreur getListPoste " + e.getMessage());
+			System.out.print("erreur getListEcole " + e.getMessage());
 			session.beginTransaction().rollback();
-			return listPoste;
+			return listEcole;
 		}
-		return listPoste;
+		return listEcole;
 	}
      
 	/*
-	 * Supprimer un poste en spécifiant l'Id
+	 * Supprimer un ecole en spécifiant l'Id
 	 */
 	@Override
-	public void deletPosteM(Integer poste) {
+	public void deletEcoleM(Integer ecole) {
 		// TODO Auto-generated method stub
 		
 Session session = HibernateUtil.getSession();
 		
 		try {
 			session.beginTransaction();
-			Poste p = (Poste) session.load(Poste.class, poste);
+			Ecole p = (Ecole) session.load(Ecole.class, ecole);
 			session.delete(p);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print("erreur deleteposteM " + e.getMessage());
+			System.out.print("erreur deleteecoleM " + e.getMessage());
 			session.beginTransaction().rollback();
 		}
 	}

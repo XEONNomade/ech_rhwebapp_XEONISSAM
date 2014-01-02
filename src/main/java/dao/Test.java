@@ -8,7 +8,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-   diplomeServ s=new diplomeServ();
+   DiplomeServ s=new DiplomeServ();
    Diplome d=new Diplome("bac+5", "etatique");
    s.addDiplome(d);
    

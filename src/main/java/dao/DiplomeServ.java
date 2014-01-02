@@ -11,127 +11,126 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.apache.log4j.Logger;
 
-@Service("ecoleInt")
+@Service("diplomeInt")
 @Transactional
-public class ecoleServ implements ecoleInt, Serializable {
+public class DiplomeServ implements DiplomeInt, Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Logger Log = Logger.getLogger(ecoleServ.class) ;
+	private static final Logger Log = Logger.getLogger(DiplomeServ.class) ;
     
 	/*
-	 * Ajouter un ecole
+	 * Ajouter un diplome
 	 */
 	@Override
-	public void addEcole(Ecole ecole) {
+	public void addDiplome(Diplome diplome) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSession();
-		Log.info("ecole bien ajoute");
 		try {
 			session.beginTransaction();
-			session.save(ecole);
+			session.save(diplome);
 				session.getTransaction().commit();
-				Log.info("ecole bien ajoute");
+				Log.info("diplome bien ajoute");
 		} catch (Exception e) {
-			System.err.print("erreur insertion ecole :" + e.getMessage());
+			System.err.print("erreur insertion diplome :" + e.getMessage());
 		}	
 	}
     
 	/*
-	 * Modifier un ecole
+	 * Modifier un diplome
 	 */
 	@Override
-	public void updateEcole(Ecole ecole) {
+	public void updateDiplome(Diplome diplome) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSession();
 		try {
 			session.beginTransaction();
-			session.update(ecole);
+			session.update(diplome);
 			session.getTransaction().commit();
-			Log.info("ecole mise à jour");
+			Log.info("diplome mise à jour");
 		} catch (Exception e) {
-			System.out.print("erreur update ecole :" + e.getMessage());
+			System.out.print("erreur update diplome :" + e.getMessage());
 		}
 	}
 
 	/*
-	 * Supprimer un ecole en spécifiant le ecole
+	 * Supprimer un diplome en spécifiant le diplome
 	 */
 	@Override
-	public void deletEcole(Ecole ecole) {
+	public void deletDiplome(Diplome diplome) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSession();
 		try {
 			session.beginTransaction();
-			session.delete(ecole);
+			session.delete(diplome);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.err.print(" erreur suppression  ecole :" + e.getMessage());
+			System.err.print(" erreur suppression  diplome :" + e.getMessage());
 			session.beginTransaction().rollback();
 		}
 	}
 
 	/*
-	 * get ecole en spécifiant l'Id de ecole
+	 * get diplome en spécifiant l'Id de diplome
 	 */
 	@Override
-	public Ecole getEcole(Integer id) {
+	public Diplome getDiplome(Integer id) {
 		// TODO Auto-generated method stub
-		Ecole ecole = null;
+		Diplome diplome = null;
 		Session session = HibernateUtil.getSession();
 		try {
 			session.beginTransaction();
-			ecole = (Ecole) session.get(Ecole.class, id);
+			diplome = (Diplome) session.get(Diplome.class, id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print("erreur getecole " + e.getMessage());
+			System.out.print("erreur getdiplome " + e.getMessage());
 			session.beginTransaction().rollback();
-			return ecole;
+			return diplome;
 		}
-		return ecole;
+		return diplome;
 	}
     
 	/*
-	 * get de la liste des ecoles
+	 * get de la liste des diplomes
 	 */
 	@Override
-	public List<Ecole> getListEcole() {
+	public List<Diplome> getListDiplome() {
 		// TODO Auto-generated method stub
 		
 		
-		List<Ecole> listEcole = null;
+		List<Diplome> listDiplome = null;
 		Session session = HibernateUtil.getSession();
 		try {
 			session.beginTransaction();
-			List<Ecole> list = session.createQuery("from Ecole").list();
-			listEcole = list;
+			List<Diplome> list = session.createQuery("from Diplome").list();
+			listDiplome = list;
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print("erreur getListEcole " + e.getMessage());
+			System.out.print("erreur getListDiplome " + e.getMessage());
 			session.beginTransaction().rollback();
-			return listEcole;
+			return listDiplome;
 		}
-		return listEcole;
+		return listDiplome;
 	}
      
 	/*
-	 * Supprimer un ecole en spécifiant l'Id
+	 * Supprimer un diplome en spécifiant l'Id
 	 */
 	@Override
-	public void deletEcoleM(Integer ecole) {
+	public void deletDiplomeM(Integer diplome) {
 		// TODO Auto-generated method stub
 		
 Session session = HibernateUtil.getSession();
 		
 		try {
 			session.beginTransaction();
-			Ecole p = (Ecole) session.load(Ecole.class, ecole);
+			Diplome p = (Diplome) session.load(Diplome.class, diplome);
 			session.delete(p);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print("erreur deleteecoleM " + e.getMessage());
+			System.out.print("erreur deletediplomeM " + e.getMessage());
 			session.beginTransaction().rollback();
 		}
 	}
