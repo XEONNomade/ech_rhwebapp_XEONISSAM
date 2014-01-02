@@ -1,6 +1,6 @@
 package model;
 
-// Generated Jan 1, 2014 9:04:01 PM by Hibernate Tools 4.0.0
+// Generated Jan 2, 2014 6:19:27 PM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -67,4 +67,5 @@ public class Date implements java.io.Serializable {
 	public void setAffecters(Set<Affecter> affecters) {
 		this.affecters = affecters;
 	}
+
 }

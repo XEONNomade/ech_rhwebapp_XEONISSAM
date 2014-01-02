@@ -1,0 +1,226 @@
+<ui:composition template="/template-lpee-forlisteM.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<ui:define name="espace">
+
+<!--  start step-holder -->
+		<div id="step-holder">
+			<div class="step-no">1</div>
+			<div class="step-dark-left"><a href="">Liste des normes</a></div>
+			<div class="step-dark-right"></div>
+			<div class="step-no-off">2</div>
+			<div class="step-light-left">Détails de la norme </div>
+			<div class="step-light-right"></div>
+			<div class="step-no-off">3</div>
+			<div class="step-light-left">Déléguer l'analyse</div>
+			<div class="step-light-right"></div>
+			<div class="step-no-off">4</div>
+			<div class="step-light-left">Associer feuille</div>
+			<div class="step-light-round"></div>
+			<div class="clear"></div>
+		</div>
+		<!--  end step-holder -->
+							<div id="step-holder2">
+								<h1>Espace Norme d'essais L.P.E.E Agadir</h1>
+							</div>
+</ui:define>
+
+<ui:define name="content">
+<div id="step-holder">
+ 	<h:form id="AjoutNE">
+		<p:commandButton value="Ajouter un collaborateur" icon="ui-icon-adds" actionListener="#{collaborateurBean.ajoutEventF(actionEvent)}" update=":edit:editNE" oncomplete="collaborateurAjout.show()" />
+
+	</h:form>
+</div>
+<br/>
+	<h:form id="b">
+		<p:growl id="growl" showDetail="true" sticky="false" />
+		<p:dataTable var="collaborateur"
+									value="#{collaborateurBean.listcollaborateur}" id="AjoutbTab"
+									widgetVar="CollaborateurTable" emptyMessage="Collaborateur non trouvé"
+									paginator="true" rows="15"
+									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,20,30"
+									style="width:500px;font-size:13px;margin-left: 0px">
+				<f:facet name="header">
+				<p:outputPanel>
+					<h:outputText value="Recherche:" />
+					<p:inputText id="globalFilter" onkeyup="CollaborateurTable.filter()" style="width:80px ;float:center " />
+				</p:outputPanel>
+			</f:facet>
+			<p:column headerText="Matricucle " id="collabMatr" filterBy="#{collaborateur.matricule}" filterMatchMode="exact" footerText=" matricule exacte" width="15px">
+				<h:outputText value="#{collaborateur.matricule}" />
+			</p:column>
+			<p:column headerText="Site " id="site" filterBy="#{collaborateur.site}" filterMatchMode="exact" footerText=" site exacte" width="8px">
+				<h:outputText value="#{collaborateur.site}" />
+			</p:column>
+			<p:column headerText="Nom " id="nom" filterBy="#{collaborateur.nomCollaborateur}" filterMatchMode="contains" footerText="contient" width="15px">
+				<h:outputText value="#{collaborateur.nomCollaborateur}" />
+			</p:column>
+			<p:column headerText="Prenom " id="prenom" filterBy="#{collaborateur.prenomCollaborateur}" filterMatchMode="startsWith" footerText="etat exact" width="15px">
+				<h:outputText value="#{collaborateur.prenomCollaborateur}" style=" color: red;"/>
+			</p:column>
+			<p:column headerText="Abréviation " id="abreviation" filterBy="#{collaborateur.abreviCollaborateur}" filterMatchMode="contains" footerText="contient" width="15px">
+				<h:outputText value="#{collaborateur.abreviCollaborateur}" style=" color: #FF8000;"/>
+			</p:column>
+			<p:column headerText="Sexe " id="sexe" filterBy="#{collaborateur.sexe}" filterMatchMode="contains" footerText="contient" width="15px">
+				<h:outputText value="#{collaborateur.sexe}" style=" color: #FF8000;"/>
+			</p:column>
+			<p:column headerText="Date Embauche " id="dateembauche" filterBy="#{collaborateur.dateEmbauche}" filterMatchMode="contains" footerText="contient" width="15px">
+				<h:outputText value="#{collaborateurBean.transform(collaborateur.dateEmbauche)}" />
+			</p:column>
+			<p:column style="width:4%">
+				<p:commandButton id="Editer" update=":Actualise:displaye" icon="ui-icon-arrowrefresh-1-w" oncomplete="collaborateurEdit.show();" actionListener="#{collaborateurBean.editEvent(collaborateur.matricule)}" title="Editer" />
+			</p:column>
+			<p:column style="width:4%">
+				<p:commandButton id="Supprimer" update=":b:AjoutbTab, :b:growl" icon="ui-icon-trash" actionListener="#{collaborateurBean.delet(collaborateur)}" title="Supprime" ></p:commandButton>
+			</p:column>
+			<!-- <p:column style="width:4%">
+				<p:commandButton  value="ajouterdiplome" 
+					icon="ui-icon-search"
+					action="/ajouterdiplome"			
+					actionListener="#{avoirBean.editEvent(collaborateur.matricule)}"
+          			title="Ajouter Diplome" />
+			</p:column>
+			<p:column style="width:4%"> 
+				<p:commandButton id="affecterposte" update=":b:AjoutbTab, :b:growl" value="affecterPoste"
+					icon="ui-icon-adds" oncomplete="affecterposte.show();"
+					actionListener="#{collaborateurBean.editEvent(collaborateur.matricule)}"
+					title="Affecter Poste" />
+			</p:column> 
+			<p:column style="width:4%">
+				<p:commandButton  value="Détail" 
+					icon="ui-icon-circle-plus"
+					action="/detail"			
+					actionListener="#{normeEBean.editEventD(norme.id)}"
+          			title="Détail" />
+			</p:column>
+			<p:column>
+				<p:commandButton  value="Ajoutercompetence" 
+					icon="ui-icon-folder-collapsed"
+					action="/feuille"			
+					actionListener="#{AffecterBean.editEventF(norme.id)}"
+          			title="Ajouter Competence" />
+			</p:column> -->
+		</p:dataTable> 
+	</h:form>
+<!-- 	<h:form id="Resultat">
+		<p:dialog header="Affecter Poste " widgetVar="affecterposte" resizable="false" id="editA" modal="true" style="height: 300px !important ; width:600px !important">
+			<p:growl id="growl" showDetail="true" sticky="false" life="10000" />
+				<h:panelGrid id="modif" columns="2" width="600" border="0">
+					<p:outputLabel for="resultat" value="Résultat de l'analyse :"
+						style="color: #2E2EFE; margin-bottom: 8px" />
+					<p:inputText value="#{normeEBean.resultat}" id="resultat" 
+						style="margin: 2px; padding: 5px;">
+					</p:inputText>
+				</h:panelGrid>
+				<p:separator />
+				<center><p:commandButton value="Enregistrer" update=":b:AjoutbTab, growl" actionListener="#{normeEBean.ajoutres(actionEvent,normeEBean.resultat)}" oncomplete="analyseResultat.hide()" /></center>
+		</p:dialog>
+	</h:form>  -->
+	<h:form id="edit">
+		<p:dialog header="Ajout de Collaborateurs" widgetVar="collaborateurAjout" resizable="false" id="editNE" modal="true" style="height: 800px !important ; width:800px !important">
+			<p:growl id="growl" showDetail="true" sticky="false" life="10000" />
+			<h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto ; height: 400px !important ; width:250px !important">
+				<f:facet name="header">
+					<h:outputLabel for="hed1" value="Formulaire d'ajout de Collaborateurs" id="hed1" />
+				</f:facet>
+				<p:outputLabel for="collaborateurmat" title="Mat" 
+				value="Matricule :" style="color: #2E2EFE;margin-bottom: 8px" />
+				
+				<p:inputText value="#{collaborateurBean.collaborateur.matricule}" id="collaborateurmat" 
+				required="true" requiredMessage="Vous devez remplir le champs Matricule." 
+				style="margin-bottom: 8px" >
+				</p:inputText>
+				
+				<p:outputLabel for="collaborateursite" title="site" 
+				value="Site :" style="color: #2E2EFE;margin-bottom: 8px" />
+				
+				<p:inputText value="#{collaborateurBean.collaborateur.site}" id="collaborateursite" 
+				required="true" requiredMessage="Vous devez remplir le champs Site." 
+				style="margin-bottom: 8px" >
+				</p:inputText>
+				
+				<p:outputLabel for="collaborateurnom" title="nom" 
+				value="Nom :" style="color: #2E2EFE;margin-bottom: 8px" />
+				
+				<p:inputText value="#{collaborateurBean.collaborateur.nomCollaborateur}" id="collaborateurnom" 
+				required="true" requiredMessage="Vous devez remplir le champs Nom." 
+				style="margin-bottom: 8px" >
+				</p:inputText>
+				
+				<p:outputLabel for="collaborateurprenom" title="prenom" 
+				value="Prenom :" style="color: #2E2EFE;margin-bottom: 8px" />
+				
+				<p:inputText value="#{collaborateurBean.collaborateur.prenomCollaborateur}" id="collaborateurprenom" 
+				required="true" requiredMessage="Vous devez remplir le champs Prenom." 
+				style="margin-bottom: 8px" >
+				</p:inputText>
+				
+				<p:outputLabel for="collaborateurbunit" title="bunit" 
+				value="Business Unit :" style="color: #2E2EFE;margin-bottom: 8px" />
+				
+				<p:inputText value="#{collaborateurBean.collaborateur.businessUnit}" id="collaborateurbunit" 
+				required="true" requiredMessage="Vous devez remplir le champs Business Unit." 
+				style="margin-bottom: 8px" >
+				</p:inputText>
+				
+				<h:outputText value="Sexe:" style="color: #2E2EFE;margin-bottom: 8px" />
+				
+        		<p:selectOneRadio  value="#{collaborateurBean.collaborateur.sexe}" style="color:black;width: 250px! important;" effect="fade" editable="true" required="true">  
+            		<f:selectItem itemLabel="Masculin" itemValue="M" />  
+           			<f:selectItem itemLabel="Feminin" itemValue="F" />
+        		</p:selectOneRadio> 
+        		
+				<p:outputLabel for="date" title="date" value="Date Embauche :" style="color: #2E2EFE;margin-bottom: 8px" />
+        		
+ 				<p:calendar value="#{collaborateurBean.collaborateur.dateEmbauche}" id="date" required="true" effect="explode" 
+ 						    navigator="true" display="inline" style="margin-bottom:1em;" requiredMessage="Vous devez remplir le champs Date d'embauche."
+							converterMessage="Invalid Date" pattern="dd-MM-yyyy">
+ 				</p:calendar>
+ 			
+        		<p:outputLabel for="datee" title="date" value="Date Participation :" style="color: #2E2EFE;margin-bottom: 8px" />
+        		
+ 				<p:calendar value="#{collaborateurBean.collaborateur.dateParticipation}" id="datee" effect="explode" 
+ 						    navigator="true" display="inline" style="margin-bottom:1em;" 
+							converterMessage="Invalid Date" pattern="dd-MM-yyyy">
+ 				</p:calendar>
+ 				
+				<p:outputLabel for="email" value="Email:" 
+				style="color: #2E2EFE;margin-bottom: 8px" />
+				
+				<p:inputText value="#{collaborateurBean.collaborateur.email}" id="email" 
+				required="true" requiredMessage="Vous devez remplir le champs Email." 
+				style="margin-bottom: 8px">
+				</p:inputText>
+				
+				
+ 				  
+			</h:panelGrid>
+			<p:separator />
+			<center><p:commandButton value="Enregistrer" update=":b:AjoutbTab, growl" 
+			actionListener="#{collaborateurBean.ajoutF(actionEvent)}" 
+			oncomplete="collaborateurAjout.hide()" /></center>
+		</p:dialog>
+	</h:form>
+	<h:form id="Actualise">
+		<p:dialog header="Modification" widgetVar="collaborateurEdit" resizable="false" id="editNor" modal="true" style="height: 800px !important ; width:800px !important">
+			<p:growl id="growl" showDetail="true" sticky="false" />
+			<h:panelGrid id="displaye" columns="2" cellpadding="4" style="margin:0 auto ; height: 400px !important ; width:250px !important">
+				<f:facet name="header">
+					<h:outputLabel for="hed" value="Formulaire de Modification" id="hed" />
+				</f:facet>
+				
+				
+			</h:panelGrid>
+			<p:separator />
+			</p:dialog>
+	</h:form>
+</ui:define>
+
+</ui:composition>

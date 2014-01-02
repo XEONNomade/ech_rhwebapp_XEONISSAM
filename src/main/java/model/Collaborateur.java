@@ -1,6 +1,6 @@
 package model;
 
-// Generated Jan 1, 2014 9:04:01 PM by Hibernate Tools 4.0.0
+// Generated Jan 2, 2014 6:19:27 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -8,8 +8,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,7 +24,7 @@ import javax.persistence.TemporalType;
 @Table(name = "collaborateur", catalog = "bddsqli")
 public class Collaborateur implements java.io.Serializable {
 
-	private Integer matricule;
+	private int matricule;
 	private ManagerRh managerRhByManagerRhActuel;
 	private ManagerRh managerRhByAncienManagerRh;
 	private String site;
@@ -38,27 +36,22 @@ public class Collaborateur implements java.io.Serializable {
 	private Date dateEmbauche;
 	private String moisBap;
 	private Date dateDepart;
-	private boolean ancienCollab;
-	private boolean participationSeminIntegr;
+	private Boolean ancienCollab;
+	private Boolean participationSeminIntegr;
 	private Date dateParticipation;
 	private String email;
-	private ManagerRh managerRh;
-	private Set<Avoir> avoirs = new HashSet<Avoir>(0);
 	private Set<Affecter> affecters = new HashSet<Affecter>(0);
+	private Set<Avoir> avoirs = new HashSet<Avoir>(0);
 	private Set<Metriser> metrisers = new HashSet<Metriser>(0);
+	private ManagerRh managerRh;
 
 	public Collaborateur() {
 	}
 
-	public Collaborateur(ManagerRh managerRhByManagerRhActuel,
-			ManagerRh managerRhByAncienManagerRh, String site,
-			String nomCollaborateur, String prenomCollaborateur,
-			String abreviCollaborateur, String businessUnit, String sexe,
-			Date dateEmbauche, String moisBap, Date dateDepart,
-			boolean ancienCollab, boolean participationSeminIntegr,
-			Date dateParticipation, String email) {
-		this.managerRhByManagerRhActuel = managerRhByManagerRhActuel;
-		this.managerRhByAncienManagerRh = managerRhByAncienManagerRh;
+	public Collaborateur(int matricule, String site, String nomCollaborateur,
+			String prenomCollaborateur, String abreviCollaborateur,
+			String businessUnit, String sexe, Date dateEmbauche, String email) {
+		this.matricule = matricule;
 		this.site = site;
 		this.nomCollaborateur = nomCollaborateur;
 		this.prenomCollaborateur = prenomCollaborateur;
@@ -66,22 +59,18 @@ public class Collaborateur implements java.io.Serializable {
 		this.businessUnit = businessUnit;
 		this.sexe = sexe;
 		this.dateEmbauche = dateEmbauche;
-		this.moisBap = moisBap;
-		this.dateDepart = dateDepart;
-		this.ancienCollab = ancienCollab;
-		this.participationSeminIntegr = participationSeminIntegr;
-		this.dateParticipation = dateParticipation;
 		this.email = email;
 	}
 
-	public Collaborateur(ManagerRh managerRhByManagerRhActuel,
+	public Collaborateur(int matricule, ManagerRh managerRhByManagerRhActuel,
 			ManagerRh managerRhByAncienManagerRh, String site,
 			String nomCollaborateur, String prenomCollaborateur,
 			String abreviCollaborateur, String businessUnit, String sexe,
 			Date dateEmbauche, String moisBap, Date dateDepart,
-			boolean ancienCollab, boolean participationSeminIntegr,
-			Date dateParticipation, String email, ManagerRh managerRh,
-			Set<Avoir> avoirs, Set<Affecter> affecters, Set<Metriser> metrisers) {
+			Boolean ancienCollab, Boolean participationSeminIntegr,
+			Date dateParticipation, String email, Set<Affecter> affecters,
+			Set<Avoir> avoirs, Set<Metriser> metrisers, ManagerRh managerRh) {
+		this.matricule = matricule;
 		this.managerRhByManagerRhActuel = managerRhByManagerRhActuel;
 		this.managerRhByAncienManagerRh = managerRhByAncienManagerRh;
 		this.site = site;
@@ -97,25 +86,24 @@ public class Collaborateur implements java.io.Serializable {
 		this.participationSeminIntegr = participationSeminIntegr;
 		this.dateParticipation = dateParticipation;
 		this.email = email;
-		this.managerRh = managerRh;
-		this.avoirs = avoirs;
 		this.affecters = affecters;
+		this.avoirs = avoirs;
 		this.metrisers = metrisers;
+		this.managerRh = managerRh;
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "matricule", unique = true, nullable = false)
-	public Integer getMatricule() {
+	public int getMatricule() {
 		return this.matricule;
 	}
 
-	public void setMatricule(Integer matricule) {
+	public void setMatricule(int matricule) {
 		this.matricule = matricule;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "manager_rh_actuel", nullable = false)
+	@JoinColumn(name = "manager_rh_actuel")
 	public ManagerRh getManagerRhByManagerRhActuel() {
 		return this.managerRhByManagerRhActuel;
 	}
@@ -126,7 +114,7 @@ public class Collaborateur implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ancien_manager_rh", nullable = false)
+	@JoinColumn(name = "ancien_manager_rh")
 	public ManagerRh getManagerRhByAncienManagerRh() {
 		return this.managerRhByAncienManagerRh;
 	}
@@ -200,7 +188,7 @@ public class Collaborateur implements java.io.Serializable {
 		this.dateEmbauche = dateEmbauche;
 	}
 
-	@Column(name = "mois_bap", nullable = false)
+	@Column(name = "mois_bap")
 	public String getMoisBap() {
 		return this.moisBap;
 	}
@@ -210,7 +198,7 @@ public class Collaborateur implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_depart", nullable = false, length = 10)
+	@Column(name = "date_depart", length = 10)
 	public Date getDateDepart() {
 		return this.dateDepart;
 	}
@@ -219,26 +207,26 @@ public class Collaborateur implements java.io.Serializable {
 		this.dateDepart = dateDepart;
 	}
 
-	@Column(name = "ancien_collab", nullable = false)
-	public boolean isAncienCollab() {
+	@Column(name = "ancien_collab")
+	public Boolean getAncienCollab() {
 		return this.ancienCollab;
 	}
 
-	public void setAncienCollab(boolean ancienCollab) {
+	public void setAncienCollab(Boolean ancienCollab) {
 		this.ancienCollab = ancienCollab;
 	}
 
-	@Column(name = "participation_semin__integr", nullable = false)
-	public boolean isParticipationSeminIntegr() {
+	@Column(name = "participation_semin__integr")
+	public Boolean getParticipationSeminIntegr() {
 		return this.participationSeminIntegr;
 	}
 
-	public void setParticipationSeminIntegr(boolean participationSeminIntegr) {
+	public void setParticipationSeminIntegr(Boolean participationSeminIntegr) {
 		this.participationSeminIntegr = participationSeminIntegr;
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_participation", nullable = false, length = 10)
+	@Column(name = "date_participation", length = 10)
 	public Date getDateParticipation() {
 		return this.dateParticipation;
 	}
@@ -256,13 +244,13 @@ public class Collaborateur implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "collaborateur")
-	public ManagerRh getManagerRh() {
-		return this.managerRh;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "collaborateur")
+	public Set<Affecter> getAffecters() {
+		return this.affecters;
 	}
 
-	public void setManagerRh(ManagerRh managerRh) {
-		this.managerRh = managerRh;
+	public void setAffecters(Set<Affecter> affecters) {
+		this.affecters = affecters;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "collaborateur")
@@ -275,21 +263,21 @@ public class Collaborateur implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "collaborateur")
-	public Set<Affecter> getAffecters() {
-		return this.affecters;
-	}
-
-	public void setAffecters(Set<Affecter> affecters) {
-		this.affecters = affecters;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "collaborateur")
 	public Set<Metriser> getMetrisers() {
 		return this.metrisers;
 	}
 
 	public void setMetrisers(Set<Metriser> metrisers) {
 		this.metrisers = metrisers;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "collaborateur")
+	public ManagerRh getManagerRh() {
+		return this.managerRh;
+	}
+
+	public void setManagerRh(ManagerRh managerRh) {
+		this.managerRh = managerRh;
 	}
 
 }
